@@ -52,7 +52,17 @@ app.get('/', (req, res) => {
 app.use('/', authRoutes);
 app.use('/inventory', inventoryRoutes);
 
-// Servidor escuchando, PORT es una variable que corresponde a la variable de entorno o a 3000
+/* // OLD- Servidor escuchando, PORT es una variable que corresponde a la variable de entorno o a 3000
 app.listen(process.env.PORT, () => {
   console.log(`Servidor ejecutándose en http://localhost:${process.env.PORT}`);
+});
+*/
+
+// Servidor escuchando, PORT es una variable que corresponde a la variable de entorno o a 3000
+app.listen(process.env.PORT, () => {
+  if (process.env.NODE_ENV === 'production') {
+    console.log(`Servidor ejecutándose en el puerto ${process.env.PORT}`);
+  } else {
+    console.log(`Servidor ejecutándose en http://localhost:${process.env.PORT}`);
+  }
 });
