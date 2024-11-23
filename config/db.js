@@ -1,7 +1,9 @@
 const mysql = require('mysql');
 
-// Cargar variables de entorno desde .env
-require('dotenv').config(); 
+if (process.env.NODE_ENV != "production" ) {
+  const dotenv = require('dotenv');
+  dotenv.config({path: './env/.env'});
+  }
 
 // Configurar la conexión a la base de datos
 const db = mysql.createConnection({
