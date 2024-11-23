@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestionar localizaciones</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<h1>Gestionar localizaciones</h1>
+
+<a href="/inventory" class="btn">Volver al inventario</a>
+<a href="/inventory/logout" class="btn">Cerrar sesión</a>
+
+<!-- Mensajes -->
+<% if (success) { %>
+  <p class="success-message"><%= success %></p>
+<% } %>
+
+<% if (error) { %>
+  <p class="error-message"><%= error %></p>
+<% } %>
+
+<div class="container">
+
+  <div class="left-column">
+    <h2>Añadir localizaciones</h2>
+    <form action="/inventory/locations/add" method="POST">
+      <label for="nombre">Nombre:</label>
+      <input type="text" name="nombre" placeholder="Nombre" required>
+      <button type="submit">Añadir localización</button>
+    </form>
+  </div>
+  
+  <div class="right-column">
+    <h2>Lista de localizaciones</h2>
+
+    <!--OLD-->
+    <!--
+    <% if (localizaciones.length > 0) { %>
+        <ul>
+          <% localizaciones.forEach(function(localizacion) { %>
+            <li><%= localizacion.nombre_localizacion %></li>
+          <% }) %>
+        </ul>
+      <% } else { %>
+        <p>Las localizaciones guardadas aparecen aquí.</p>
+      <% } %>
+  -->
+  
+  <% if (localizaciones.length > 0) { %>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+          <% localizaciones.forEach(function(localizacion) { %>
+                <tr>
+                    <td><%= localizacion.nombre_localizacion %></td>
+                    <td>
+                      <form action="/inventory/locations/delete/<%= localizacion.id_localizacion %>" method="POST" style="display:inline;">
+                        <button type="submit" class="login" onclick="return confirm('¿Estás seguro de que deseas eliminar esta localización?');">Eliminar</button>
+                      </form>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+  <% } else { %>
+    <p>Las localizaciones guardadas aparecen aquí.</p>
+  <% } %>
+   
+
+    </div>
+
+  </div>
+
+</body>
+</html>

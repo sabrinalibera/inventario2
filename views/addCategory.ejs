@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestionar categorías</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<h1>Gestionar categorías</h1>
+
+<a href="/inventory" class="btn">Volver al inventario</a>
+<a href="/inventory/logout" class="btn">Cerrar sesión</a>
+
+<!-- Mensajes -->
+<% if (success) { %>
+  <p class="success-message"><%= success %></p>
+<% } %>
+
+<% if (error) { %>
+  <p class="error-message"><%= error %></p>
+<% } %>
+
+<div class="container">
+  
+  <div class="left-column">
+    <h2>Añadir categorías</h2>
+    <form action="/inventory/categories/add" method="POST">
+      <label for="nombre">Nombre:</label>
+      <input type="text" name="nombre" placeholder="Nombre" required>
+      <button type="submit">Añadir categoría</button>
+    </form>
+  </div>
+  
+  <div class="right-column">
+    <h2>Lista de categorías</h2>
+    
+    <!--OLD-->
+    <!--
+      <% if (categorias.length > 0) { %>
+        <ul>
+          <% categorias.forEach(function(categoria) { %>
+            <li><%= categoria.nombre_categoria %></li>
+          <% }) %>
+        </ul>
+      <% } else { %>
+        <p>Las categorías guardadas aparecen aquí.</p>
+      <% } %>
+ -->
+
+ 
+ <% if (categorias.length > 0) { %>
+  <table>
+      <thead>
+          <tr>
+              <th>Nombre</th>
+              <th>Acción</th>
+          </tr>
+      </thead>
+      <tbody>
+          <% categorias.forEach(function(categoria) { %>
+              <tr>
+                  <td><%= categoria.nombre_categoria %></td>
+                  <td><form action="/inventory/categories/delete/<%= categoria.id_categoria %>" method="POST" style="display:inline;">
+                    <button type="submit" class="login" onclick="return confirm('¿Estás seguro de que deseas eliminar esta categoría?');">Eliminar</button>
+                </form></td>
+              </tr>
+          <% }) %>
+      </tbody>
+  </table>
+<% } else { %>
+  <p>Las categorías guardadas aparecen aquí.</p>
+<% } %>
+ 
+    </div>
+  
+</div>
+
+</body>
+</html>

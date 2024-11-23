@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestionar Productos</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <h1>Gestionar productos</h1>
+
+    <a href="/inventory" class="btn">Volver al inventario</a>
+    <a href="/inventory/logout" class="btn">Cerrar sesión</a>
+
+<!-- Mensajes -->
+<% if (success) { %>
+  <p class="success-message"><%= success %></p>
+<% } %>
+
+<% if (error) { %>
+  <p class="error-message"><%= error %></p>
+<% } %>
+
+    <div class="container">
+
+      <div class="left-column">
+        <h2>Añadir producto</h2>
+          <form action="/inventory/products/add" method="POST">
+        <label for="nombre">Nombre:</label>
+        <input type="text" name="nombre" required><br>
+        <label for="marca">Marca:</label>
+        <input type="text" name="marca" required><br>
+        <label for="precio">Precio:</label>
+        <input type="number" name="precio" step="0.01" required><br>
+        <label for="costo">Costo:</label>
+        <input type="number" name="costo" step="0.01" required><br>
+        <label for="medida">Medida:</label>
+        <input type="text" name="medida" required><br>
+        <label for="stock">Stock:</label>
+        <input type="number" name="stock" required><br>
+        <label for="stock_minimo">Stock mínimo:</label>
+        <input type="number" name="stock_minimo" required><br>
+        
+        <!-- Dropdown para seleccionar el proveedor -->
+        <label for="proveedor">Proveedor:</label>
+        <select id="proveedor" name="proveedor" required>
+          <option value=""></option>
+          <% proveedores.forEach(function(proveedor) { %>
+        <option value="<%= proveedor.id_proveedor %>"><%= proveedor.nombre_proveedor %></option>
+          <% }) %>
+        </select><br>
+        
+        <!-- Dropdown para seleccionar la categoría -->
+        <label for="categoria">Categoría:</label>
+        <select id="categoria" name="categoria" required>
+          <option value=""></option>
+          <% categorias.forEach(function(categoria) { %>
+        <option value="<%= categoria.id_categoria %>"><%= categoria.nombre_categoria %></option>
+          <% }) %>
+        </select><br>
+        
+        <!-- Dropdown para seleccionar la localización -->
+        <label for="localizacion">Localización:</label>
+        <select id="localizacion" name="localizacion" required>
+          <option value=""></option>
+          <% localizaciones.forEach(function(localizacion) { %>
+        <option value="<%= localizacion.id_localizacion %>"><%= localizacion.nombre_localizacion %></option>
+          <% }) %>
+        </select><br>
+        <label for="observaciones">Observaciones:</label>
+        <input type="text" name="observaciones"><br>
+        <button type="submit">Añadir producto</button>
+          </form>
+      </div>
+      
+        <div class="right-column">
+          <h2>Lista de productos</h2>
+
+          <!--
+          <% if (productos.length > 0) { %>
+                <ul>
+          <% productos.forEach(function(producto) { %>
+            <li><%= producto.nombre_producto %></li>
+          <% }) %>
+                </ul>
+          <% } else { %>
+                <p>Los productos guardados aparecen aquí.</p>
+          <% } %>
+        -->
+        
+        <% if (productos.length > 0) { %>
+        <table>
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Marca</th>
+              <th>Precio</th>
+              <th>Costo</th>
+              <th>Medida</th>
+              <th>Stock</th>
+              <th>Stock mínimo</th>
+              <th>Proveedor</th>
+              <th>Categoría</th>
+              <th>Localización</th>
+              <th>Observaciones</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% productos.forEach(function(producto) { %>
+            <tr>
+              <td><%= producto.nombre_producto %></td>
+              <td><%= producto.marca %></td>
+              <td><%= producto.precio %></td>
+              <td><%= producto.costo %></td>
+              <td><%= producto.medida %></td>
+              <td><%= producto.stock %></td>
+              <td><%= producto.stock_minimo %></td>
+              <td><%= producto.nombre_proveedor %></td>
+              <td><%= producto.nombre_categoria %></td>
+              <td><%= producto.nombre_localizacion %></td>
+              <td><%= producto.observaciones %></td>
+              <td>
+                <form action="/inventory/products/delete/<%= producto.id_producto %>" method="POST" style="display:inline;">
+                  <button type="submit" class="login" onclick="return confirm('¿Estás seguro de que deseas eliminar este producto?');">Eliminar</button>
+                </form>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+        <% } else { %>
+        <p>Los productos guardados aparecen aquí.</p>
+        <% } %>
+        
+        </div>
+    
+      </div>
+
+</body>
+</html>

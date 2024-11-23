@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Panel de inventario</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <h1>Panel de inventario</h1>
+  <!-- Imprime los datos del usuario en la vista -->
+  <!--<pre><%= JSON.stringify(user, null, 2) %></pre> -->
+  <p>Antes de añadir productos, añade los proveedores, categorías y localizaciones correspondientes.</p>
+  
+  <!--OLD-->
+  <!--
+  <ul>
+    <li><a href="/inventory/products">Gestionar productos</a></li>
+    <li><a href="/inventory/categories">Gestionar categorías</a></li>
+    <li><a href="/inventory/suppliers">Gestionar proveedores</a></li>
+    <li><a href="/inventory/locations">Gestionar localizaciones</a></li>
+    <li><a href="/inventory/low-stock">Productos bajo nivel de stock</a></li>
+    <% if (user && user.id_rol === 2) { %>
+      <li><a href="/inventory/users">Gestionar usuarios (solo Admin)</a></li>
+  <% } %>
+    <li><a href="/inventory/logout">Cerrar Sesión</a></li>
+  </ul>
+-->
+
+<div class="panel-container">
+  <div class="panel">
+    <h2>Gestionar productos</h2>
+    <a href="/inventory/products" class="btn">Ir a productos</a>
+  </div>
+  <div class="panel">
+    <h2>Gestionar proveedores</h2>
+    <a href="/inventory/suppliers" class="btn">Ir a proveedores</a>
+  </div>
+  <div class="panel">
+    <h2>Gestionar categorías</h2>
+    <a href="/inventory/categories" class="btn">Ir a categorías</a>
+  </div>
+  <div class="panel">
+    <h2>Gestionar localizaciones</h2>
+    <a href="/inventory/locations" class="btn">Ir a localizaciones</a>
+  </div>
+  <div class="panel">
+    <h2>Productos bajo stock</h2>
+    <a href="/inventory/low-stock" class="btn">Ver productos en bajo stock</a>
+  </div>
+  <% if (user && user.id_rol === 2) { %>
+    <div class="panel">
+      <h2>Gestionar usuarios (Admin)</h2>
+      <a href="/inventory/users" class="btn">Ir a usuarios</a>
+    </div>
+  <% } %>
+  <div class="panel">
+    <h2>Cerrar sesión</h2>
+    <a href="/inventory/logout" class="btn">Cerrar sesión</a>
+  </div>
+</div>
+
+</body>
+</html>

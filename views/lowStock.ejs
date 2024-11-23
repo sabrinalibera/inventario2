@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Productos con bajo stock</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <h1>Productos con bajo stock</h1>
+
+<!-- OLD-->
+  <!--
+  <ul>
+    <% productos.forEach(function(producto) { %>
+      <li><%= producto.nombre_producto %> - Stock actual: <%= producto.stock %>/ Stock mínimo: <%= producto.stock_minimo %> </li>
+    <% }); %>
+  </ul>
+-->
+<a href="/inventory" class="btn">Volver al inventario</a>
+<a href="/inventory/logout" class="btn">Cerrar sesión</a>
+
+<h2>Lista de productos con bajo stock</h2>
+
+<% if (productos.length > 0) { %>
+<table>
+  <thead>
+    <tr>
+      <th>Nombre del Producto</th>
+      <th>Stock Actual</th>
+      <th>Stock Mínimo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% productos.forEach(function(producto) { %>
+      <tr>
+        <td><%= producto.nombre_producto %></td>
+        <td><%= producto.stock %></td>
+        <td><%= producto.stock_minimo %></td>
+      </tr>
+    <% }); %>
+  </tbody>
+</table>
+<% } else { %>
+  <p>Los productos con bajo stock aparecen aquí.</p>
+<% } %>
+
+</body>
+</html>

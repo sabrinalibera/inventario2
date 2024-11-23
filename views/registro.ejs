@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro de usuario</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <h1>Registro de usuario</h1>
+  <form action="/register" method="POST">
+    <label for="nombre">Nombre:</label>
+    <input type="text" name="nombre" placeholder="Nombre" required class="login">
+    <label for="apellidos">Apellidos:</label>
+    <input type="text" name="apellidos" placeholder="Apellidos" required class="login">
+    <label for="email">Email:</label>
+    <input type="email" name="email" placeholder="Email" required class="login">
+    <label for="telefono">Teléfono:</label>
+    <input type="text" name="telefono" placeholder="Teléfono" required class="login">
+    <label for="password">Contraseña:</label>
+    <input type="password" name="password" placeholder="Contraseña" required class="login">
+    <button type="submit" class="login">Registrar</button>
+  </form>
+</body>
+</html>

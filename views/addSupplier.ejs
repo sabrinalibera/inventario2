@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestionar proveedores</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<h1>Gestionar proveedores</h1>
+
+<a href="/inventory" class="btn">Volver al inventario</a>
+<a href="/inventory/logout" class="btn">Cerrar sesión</a>
+
+<!-- Mensajes -->
+<% if (success) { %>
+  <p class="success-message"><%= success %></p>
+<% } %>
+
+<% if (error) { %>
+  <p class="error-message"><%= error %></p>
+<% } %>
+
+<div class="container">
+
+  <div class="left-column">
+    <h2>Añadir proveedores</h2>
+    <form action="/inventory/suppliers/add" method="POST">
+      <label for="nombre">Nombre:</label>
+      <input type="text" name="nombre" placeholder="Nombre" required>
+      <label for="telefono">Teléfono:</label>
+      <input type="text" name="telefono" placeholder="Teléfono" required>
+      <label for="web">Sitio web:</label>
+      <input type="text" name="web" placeholder="Sitio web">
+      <label for="email">Email:</label>
+      <input type="email" name="email" placeholder="Correo electrónico" required>
+      <button type="submit">Añadir proveedor</button>
+    </form>
+  </div>
+  
+  <div class="right-column">
+    <h2>Lista de proveedores</h2>
+    
+    <!-- OLD-->
+    <!-- <% if (proveedores.length > 0) { %>
+        <ul>
+          <% proveedores.forEach(function(proveedor) { %>
+            <li><%= proveedor.nombre_proveedor %></li>
+          <% }) %>
+        </ul>
+      <% } else { %>
+        <p>Los proveedores guardados aparecen aquí.</p>
+      <% } %> -->
+    
+      <% if (proveedores.length > 0) { %>
+        <table>
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Teléfono</th>
+              <th>Sitio Web</th>
+              <th>Email</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% proveedores.forEach(function(proveedor) { %>
+              <tr>
+                <td><%= proveedor.nombre_proveedor %></td>
+                <td><%= proveedor.telefono %></td>
+                <td><%= proveedor.web %></td>
+                <td><%= proveedor.email %></td>
+                <td>
+                  <form action="/inventory/suppliers/delete/<%= proveedor.id_proveedor %>" method="POST" style="display:inline;">
+                    <button type="submit" class="login" onclick="return confirm('¿Estás seguro de que deseas eliminar este proveedor?');">Eliminar</button>
+                  </form>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      <% } else { %>
+        <p>Los proveedores guardados aparecen aquí.</p>
+      <% } %>
+    
+    </div>
+  
+  </div>
+
+</body>
+</html>
